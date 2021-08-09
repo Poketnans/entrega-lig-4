@@ -18,3 +18,26 @@ createTemplate()
 
 const firstCells = document.querySelectorAll(".line[data-column-line$='-0']");
 const columnsArray = [...firstCells].map( cell => cell.parentElement );
+
+const colClickhandler = (event) => {
+    const column = event.currentTarget;
+
+    const cellNodes = column.childNodes;
+
+    const lastWithoutADisc = [...cellNodes].reverse().find( (cell) => {
+        return cell.childElementCount === 0;
+    });
+
+    if ( lastWithoutADisc ) {
+        const disc = genDisc();
+        const cellDataSet = lastWithoutADisc.dataset.columnLine;
+
+        disc.dataset.discAddress = cellDataSet;
+        disc.classList.add('disc');
+
+        lastWithoutADisc.appendChild(disc);
+    }
+    if ( !lastWithoutADisc ) {
+        colFilldMsg();
+    }
+}
