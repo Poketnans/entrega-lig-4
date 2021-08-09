@@ -15,3 +15,6 @@ const createTemplate = () => {
 }
 
 createTemplate()
+
+const firstCells = document.querySelectorAll(".line[data-column-line$='-0']");
+const columnsArray = [...firstCells].map( cell => cell.parentElement );
