@@ -19,6 +19,31 @@ createTemplate()
 const firstCells = document.querySelectorAll(".line[data-column-line$='-0']");
 const columnsArray = [...firstCells].map( cell => cell.parentElement );
 
+let lastColor = 'red';
+
+const getColor = () => {
+    const switchColorObj = {
+        red: 'black',
+        black: 'red'
+    };
+
+    const color = lastColor;
+
+    lastColor = switchColorObj[lastColor];
+
+    return color;
+}
+
+const genDisc = () => {
+    const newDisc = document.createElement('div');
+
+    const discColor = getColor();
+
+    newDisc.dataset.color = discColor;
+
+    return newDisc;
+}
+
 const colClickhandler = (event) => {
     const column = event.currentTarget;
 
