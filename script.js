@@ -67,12 +67,12 @@ const colClickhandler = (event) => {
     }
 }
 
-const checkColorMatch = (cell1Color, cell2Color, cell3Color, cell4Color) => {
-    const firstIsntZero = cell1Color !== 0;
+const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
+    const firstIsntZero = disc1Color !== 0;
 
-    const otherCellColors = [cell2Color, cell3Color, cell4Color];
+    const otherDiscColors = [disc2Color, disc3Color, disc4Color];
 
-    const isAllTheSame = otherCellColors.every( cellColor => cellColor === cell1Color );
+    const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
 
     return firstIsntZero && isAllTheSame;
 }
