@@ -71,7 +71,6 @@ const colClickhandler = (event) => {
     }
 }
 
-<<<<<<< HEAD
 let positionArray  =  [
                         [0,0,0,0,0,0,0], 
                         [0,0,0,0,0,0,0], 
@@ -91,9 +90,7 @@ let verticalWinningChecker = (aaaa) => {
     }
 } 
 
-// indice do array 0 b r outerHeight
-// se tiver 4 b ou r
-=======
+
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     const firstIsntZero = disc1Color !== 0;
 
@@ -105,4 +102,3 @@ const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
 }
 
 columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
->>>>>>> development
