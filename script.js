@@ -65,10 +65,6 @@ const genDisc = () => {
     return newDisc;
 }
 
-const colFilledMsg = (columnNode) => {
-    columnNode.classList.add('filledColumnError');
-}
-
 const colClickhandler = (event) => {
     const column = event.currentTarget;
 
@@ -88,7 +84,7 @@ const colClickhandler = (event) => {
         modifyArray(disc)
     }
     if ( !lastWithoutADisc ) {
-        colFilledMsg(column);
+        colFilldMsg();
     }
 }
 
@@ -104,8 +100,6 @@ const modifyArray = (currentAppend) => {
     }
 };
 
-columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
-
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     const firstIsntZero = disc1Color !== 0;
 
@@ -115,3 +109,5 @@ const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
 
     return firstIsntZero && isAllTheSame;
 }
+
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
