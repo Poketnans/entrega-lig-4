@@ -1,13 +1,13 @@
 const gameContainer = document.getElementById('game-container')
 
-let dataArray  =  [
-    [0,0,0,0,0,0,0], 
+let dataArray  = [
+    [0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0]
-  ]
+]
 
 
 const createTemplate = () => {
@@ -15,7 +15,7 @@ const createTemplate = () => {
         let column = document.createElement('div')
         gameContainer.appendChild(column)
 
-        for(let j = 0; j < 6; j++){
+        for(let j = 5; j >= 0; j--){
             let line = document.createElement('div')
             line.dataset.columnLine = `${j}-${i}`
             line.classList.add('line')
@@ -54,9 +54,6 @@ const genDisc = () => {
     } else {
         newDisc.style.background = 'red'
     }
-    newDisc.style.borderRadius = '50%'
-    newDisc.style.width = '50px';
-    newDisc.style.height = '50px';
 
     newDisc.dataset.color = discColor;
     newDisc.classList.add('disc');
@@ -81,6 +78,10 @@ const colClickhandler = (event) => {
 
         lastWithoutADisc.appendChild(disc);
         modifyArray(disc)
+        checkVertical(dataArray);
+        checkHorizontal(dataArray);
+        checkDownLeft(dataArray);
+        checkDownRight(dataArray);
     }
     if ( !lastWithoutADisc ) {
         colFilldMsg();
@@ -100,14 +101,49 @@ const modifyArray = (currentAppend) => {
 };
 
 
-const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
-    const firstIsntZero = disc1Color !== 0;
-
-    const otherDiscColors = [disc2Color, disc3Color, disc4Color];
-
-    const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
-
-    return firstIsntZero && isAllTheSame;
-}
 
 columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
+
+const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
+    return ((disc1Color !== 0) && (disc1Color === disc2Color) && (disc1Color === disc2Color) && (disc1Color === disc3Color) && (disc1Color === disc4Color))
+}
+
+const checkDownRight = (dataBase) => {
+    for(let line = 0; line < 3; line++){
+        for(let column = 0; column < 4; column++){
+            if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
+                console.log('entrouDiagonalDireita')
+            }
+        }
+    }
+}
+
+const checkDownLeft = (dataBase) => {
+    for(let line = 0; line < 3; line++){
+        for(column = 3; column < 7; column++){
+            if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
+                console.log('entrouDiagonalEsquerda')
+            }
+        }
+    }
+}
+
+const checkVertical = (dataBase) => {
+    for(let line = 0; line < 3; line++){
+        for(let column = 0; column < 7; column++){
+            if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
+                console.log('entrouVertical')
+            }
+        }
+    }
+}
+
+const checkHorizontal = (dataBase) => {
+    for(let line = 0; line < 6; line++){
+        for(let column = 0; column < 5; column++){
+            if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
+                console.log('entrouHorizontal')
+            }
+        }
+    }
+}
