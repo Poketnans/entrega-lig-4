@@ -98,7 +98,15 @@ const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
 
     const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
 
-    return firstIsntZero && isAllTheSame;
+    return isAllTheSame;
 }
 
-columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
+
+// const checkForWinner = () => {
+//     for(let l = 0; l < 4; l++){
+//         for(let c = 0; c < 3; c++){
+//             if(checkColorMatch())
+//         }
+//     }
+// }
