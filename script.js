@@ -7,7 +7,7 @@ const createTemplate = () => {
 
         for(let j = 0; j < 6; j++){
             let line = document.createElement('div')
-            line.dataset.columnLine = `${i}-${j}`
+            line.dataset.columnLine = `${j}-${i}`
             line.classList.add('line')
             column.appendChild(line)
         }
@@ -16,7 +16,7 @@ const createTemplate = () => {
 
 createTemplate()
 
-const firstCells = document.querySelectorAll(".line[data-column-line$='-0']");
+const firstCells = document.querySelectorAll(".line[data-column-line|='0']");
 const columnsArray = [...firstCells].map( cell => cell.parentElement );
 
 let lastColor = 'red';
@@ -66,3 +66,15 @@ const colClickhandler = (event) => {
         colFilldMsg();
     }
 }
+
+const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
+    const firstIsntZero = disc1Color !== 0;
+
+    const otherDiscColors = [disc2Color, disc3Color, disc4Color];
+
+    const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
+
+    return firstIsntZero && isAllTheSame;
+}
+
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
