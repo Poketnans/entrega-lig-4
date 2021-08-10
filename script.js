@@ -66,3 +66,5 @@ const colClickhandler = (event) => {
         colFilldMsg();
     }
 }
+
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
