@@ -44,6 +44,10 @@ const genDisc = () => {
     return newDisc;
 }
 
+const colFilledMsg = (columnNode) => {
+    columnNode.classList.add('filledColumnError');
+}
+
 const colClickhandler = (event) => {
     const column = event.currentTarget;
 
@@ -63,6 +67,6 @@ const colClickhandler = (event) => {
         lastWithoutADisc.appendChild(disc);
     }
     if ( !lastWithoutADisc ) {
-        colFilldMsg();
+        colFilledMsg(column);
     }
 }
