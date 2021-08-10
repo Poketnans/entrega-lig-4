@@ -1,5 +1,15 @@
 const gameContainer = document.getElementById('game-container')
 
+let dataArray  =  [
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0]
+  ]
+
+
 const createTemplate = () => {
     for(let i = 0; i < 7; i++){
         let column = document.createElement('div')
@@ -38,15 +48,20 @@ const genDisc = () => {
     const newDisc = document.createElement('div');
 
     const discColor = getColor();
+    
+    if(discColor === 'black'){
+        newDisc.style.background = 'black'
+    } else {
+        newDisc.style.background = 'red'
+    }
+    newDisc.style.borderRadius = '50%'
+    newDisc.style.width = '50px';
+    newDisc.style.height = '50px';
 
     newDisc.dataset.color = discColor;
     newDisc.classList.add('disc');
 
     return newDisc;
-}
-
-const colFilledMsg = (columnNode) => {
-    columnNode.classList.add('filledColumnError');
 }
 
 const colClickhandler = (event) => {
@@ -65,30 +80,25 @@ const colClickhandler = (event) => {
         disc.dataset.discAddress = cellDataSet;
 
         lastWithoutADisc.appendChild(disc);
+        modifyArray(disc)
     }
     if ( !lastWithoutADisc ) {
-        colFilledMsg(column);
+        colFilldMsg();
     }
 }
 
-let positionArray  =  [
-                        [0,0,0,0,0,0,0], 
-                        [0,0,0,0,0,0,0], 
-                        [0,0,0,0,0,0,0], 
-                        [0,0,0,0,0,0,0], 
-                        [0,0,0,0,0,0,0], 
-                        [0,0,0,0,0,0,0]
-                      ]
- 
-let verticalWinningChecker = (aaaa) => {
-    for(let i = 0; i <= 3; i++){
-        for(let j = 0; j < 7; j++){
-            if(funcaoSeraCriadaa()){
-                
-            }
-        }
+const modifyArray = (currentAppend) => {
+    const positionData = currentAppend.dataset.discAddress; 
+    const indexOfHifen = positionData.indexOf('-');
+    let positionLine = Number(positionData.slice(0, indexOfHifen))
+    let positionColumn = Number(positionData.slice(indexOfHifen + 1))
+    if(currentAppend.dataset.color === 'black'){
+        dataArray[positionLine][positionColumn] = 'b'
+    } else {
+        dataArray[positionLine][positionColumn] = 'r'
     }
-} 
+};
+
 
 
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
