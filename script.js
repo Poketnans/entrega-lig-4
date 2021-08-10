@@ -66,3 +66,13 @@ const colClickhandler = (event) => {
         colFilldMsg();
     }
 }
+
+const checkColorMatch = (cell1Color, cell2Color, cell3Color, cell4Color) => {
+    const firstIsntZero = cell1Color !== 0;
+
+    const otherCellColors = [cell2Color, cell3Color, cell4Color];
+
+    const isAllTheSame = otherCellColors.every( cellColor => cellColor === cell1Color );
+
+    return firstIsntZero && isAllTheSame;
+}
