@@ -1,5 +1,16 @@
 const gameContainer = document.getElementById('game-container')
 
+
+//Array bidimensional para fins de DEBUG.
+const dataArray = [
+    [0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0]
+]
+
 const createTemplate = () => {
     for(let i = 0; i < 7; i++){
         let column = document.createElement('div')
@@ -38,6 +49,15 @@ const genDisc = () => {
     const newDisc = document.createElement('div');
 
     const discColor = getColor();
+    
+    if(discColor === 'black'){
+        newDisc.style.background = 'black'
+    } else {
+        newDisc.style.background = 'red'
+    }
+    newDisc.style.borderRadius = '50%'
+    newDisc.style.width = '50px';
+    newDisc.style.height = '50px';
 
     newDisc.dataset.color = discColor;
 
@@ -61,8 +81,24 @@ const colClickhandler = (event) => {
         disc.classList.add('disc');
 
         lastWithoutADisc.appendChild(disc);
+        modifyArray(disc)
     }
     if ( !lastWithoutADisc ) {
         colFilldMsg();
     }
 }
+
+//EventListener para fins de DEBUG
+columnsArray.forEach(column => column.addEventListener('click', colClickhandler));
+
+const modifyArray = (currentAppend) => {
+    const positionData = currentAppend.dataset.discAddress; 
+    const indexOfHifen = positionData.indexOf('-');
+    let positionLine = Number(positionData.slice(0, indexOfHifen))
+    let positionColumn = Number(positionData.slice(indexOfHifen + 1))
+    if(currentAppend.dataset.color === 'black'){
+        dataArray[positionLine][positionColumn] = 'b'
+    } else {
+        dataArray[positionLine][positionColumn] = 'r'
+    }
+};
