@@ -76,3 +76,5 @@ const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
 
     return firstIsntZero && isAllTheSame;
 }
+
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
