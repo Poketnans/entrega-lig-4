@@ -54,9 +54,6 @@ const genDisc = () => {
     } else {
         newDisc.style.background = 'red'
     }
-    newDisc.style.borderRadius = '50%'
-    newDisc.style.width = '50px';
-    newDisc.style.height = '50px';
 
     newDisc.dataset.color = discColor;
     newDisc.classList.add('disc');
@@ -81,7 +78,10 @@ const colClickhandler = (event) => {
 
         lastWithoutADisc.appendChild(disc);
         modifyArray(disc)
-        checkForWinner(dataArray);
+        checkVertical(dataArray);
+        checkHorizontal(dataArray);
+        checkDownLeft(dataArray);
+        checkDownRight(dataArray);
     }
     if ( !lastWithoutADisc ) {
         colFilldMsg();
@@ -92,9 +92,7 @@ const modifyArray = (currentAppend) => {
     const positionData = currentAppend.dataset.discAddress; 
     const indexOfHifen = positionData.indexOf('-');
     let positionLine = Number(positionData.slice(0, indexOfHifen))
-    console.log(positionLine);
     let positionColumn = Number(positionData.slice(indexOfHifen + 1))
-    console.log(positionColumn)
     if(currentAppend.dataset.color === 'black'){
         dataArray[positionLine][positionColumn] = 'b'
     } else {
@@ -104,42 +102,47 @@ const modifyArray = (currentAppend) => {
 
 
 
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
+
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     return ((disc1Color !== 0) && (disc1Color === disc2Color) && (disc1Color === disc2Color) && (disc1Color === disc3Color) && (disc1Color === disc4Color))
 }
 
-columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
-
-const checkForWinner = (param) => {
-    // DIAGONAL PARA ESQUERDA
+const checkDownRight = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(let column = 0; column < 4; column++){
-            if(checkColorMatch(param[line][column], param[line + 1][column + 1], param[line + 2][column + 2], param[line + 3][column + 3])){
-                console.log('entrou')
+            if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
+                console.log('entrouDiagonalDireita')
             }
         }
     }
-    // DIAGONAL PARA DIREITA
+}
+
+const checkDownLeft = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(column = 3; column < 7; column++){
-            if(checkColorMatch(param[line][column], param[line + 1][column - 1], param[line + 2][column - 2], param[line + 3][column - 3])){
-                console.log('entrou2')
+            if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
+                console.log('entrouDiagonalEsquerda')
             }
         }
     }
-    // Vertical
+}
+
+const checkVertical = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(let column = 0; column < 7; column++){
-            if(checkColorMatch(param[line][column], param[line + 1][column], param[line + 2][column], param[line + 3][column])){
-                console.log('entrou3')
+            if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
+                console.log('entrouVertical')
             }
         }
     }
-    //Horizontal
+}
+
+const checkHorizontal = (dataBase) => {
     for(let line = 0; line < 6; line++){
         for(let column = 0; column < 5; column++){
-            if(checkColorMatch(param[line][column], param[line][column + 1], param[line][column + 2], param[line][column + 3])){
-                console.log('entrou4')
+            if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
+                console.log('entrouHorizontal')
             }
         }
     }
