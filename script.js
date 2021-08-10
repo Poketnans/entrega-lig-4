@@ -67,4 +67,14 @@ const colClickhandler = (event) => {
     }
 }
 
+const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
+    const firstIsntZero = disc1Color !== 0;
+
+    const otherDiscColors = [disc2Color, disc3Color, disc4Color];
+
+    const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
+
+    return firstIsntZero && isAllTheSame;
+}
+
 columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
