@@ -1,13 +1,13 @@
 const gameContainer = document.getElementById('game-container')
 
-let dataArray  =  [
-    [0,0,0,0,0,0,0], 
+let dataArray  = [
+    [0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0]
-  ]
+]
 
 
 const createTemplate = () => {
@@ -15,7 +15,7 @@ const createTemplate = () => {
         let column = document.createElement('div')
         gameContainer.appendChild(column)
 
-        for(let j = 0; j < 6; j++){
+        for(let j = 5; j >= 0; j--){
             let line = document.createElement('div')
             line.dataset.columnLine = `${j}-${i}`
             line.classList.add('line')
@@ -81,6 +81,7 @@ const colClickhandler = (event) => {
 
         lastWithoutADisc.appendChild(disc);
         modifyArray(disc)
+        checkForWinner(dataArray);
     }
     if ( !lastWithoutADisc ) {
         colFilldMsg();
@@ -91,7 +92,9 @@ const modifyArray = (currentAppend) => {
     const positionData = currentAppend.dataset.discAddress; 
     const indexOfHifen = positionData.indexOf('-');
     let positionLine = Number(positionData.slice(0, indexOfHifen))
+    console.log(positionLine);
     let positionColumn = Number(positionData.slice(indexOfHifen + 1))
+    console.log(positionColumn)
     if(currentAppend.dataset.color === 'black'){
         dataArray[positionLine][positionColumn] = 'b'
     } else {
@@ -102,21 +105,42 @@ const modifyArray = (currentAppend) => {
 
 
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
-    const firstIsntZero = disc1Color !== 0;
-
-    const otherDiscColors = [disc2Color, disc3Color, disc4Color];
-
-    const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
-
-    return isAllTheSame;
+    return ((disc1Color !== 0) && (disc1Color === disc2Color) && (disc1Color === disc2Color) && (disc1Color === disc3Color) && (disc1Color === disc4Color))
 }
 
 columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
 
-// const checkForWinner = () => {
-//     for(let l = 0; l < 4; l++){
-//         for(let c = 0; c < 3; c++){
-//             if(checkColorMatch())
-//         }
-//     }
-// }
+const checkForWinner = (param) => {
+    // DIAGONAL PARA ESQUERDA
+    for(let line = 0; line < 3; line++){
+        for(let column = 0; column < 4; column++){
+            if(checkColorMatch(param[line][column], param[line + 1][column + 1], param[line + 2][column + 2], param[line + 3][column + 3])){
+                console.log('entrou')
+            }
+        }
+    }
+    // DIAGONAL PARA DIREITA
+    for(let line = 0; line < 3; line++){
+        for(column = 3; column < 7; column++){
+            if(checkColorMatch(param[line][column], param[line + 1][column - 1], param[line + 2][column - 2], param[line + 3][column - 3])){
+                console.log('entrou2')
+            }
+        }
+    }
+    // Vertical
+    for(let line = 0; line < 3; line++){
+        for(let column = 0; column < 7; column++){
+            if(checkColorMatch(param[line][column], param[line + 1][column], param[line + 2][column], param[line + 3][column])){
+                console.log('entrou3')
+            }
+        }
+    }
+    //Horizontal
+    for(let line = 0; line < 6; line++){
+        for(let column = 0; column < 5; column++){
+            if(checkColorMatch(param[line][column], param[line][column + 1], param[line][column + 2], param[line][column + 3])){
+                console.log('entrou4')
+            }
+        }
+    }
+}
