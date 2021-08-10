@@ -99,16 +99,6 @@ const modifyArray = (currentAppend) => {
     }
 };
 
- 
-let verticalWinningChecker = (aaaa) => {
-    for(let i = 0; i <= 3; i++){
-        for(let j = 0; j < 7; j++){
-            if(funcaoSeraCriadaa()){
-                
-            }
-        }
-    }
-} 
 
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     const firstIsntZero = disc1Color !== 0;
