@@ -40,8 +40,13 @@ const genDisc = () => {
     const discColor = getColor();
 
     newDisc.dataset.color = discColor;
+    newDisc.classList.add('disc');
 
     return newDisc;
+}
+
+const colFilledMsg = (columnNode) => {
+    columnNode.classList.add('filledColumnError');
 }
 
 const colClickhandler = (event) => {
@@ -58,15 +63,15 @@ const colClickhandler = (event) => {
         const cellDataSet = lastWithoutADisc.dataset.columnLine;
 
         disc.dataset.discAddress = cellDataSet;
-        disc.classList.add('disc');
 
         lastWithoutADisc.appendChild(disc);
     }
     if ( !lastWithoutADisc ) {
-        colFilldMsg();
+        colFilledMsg(column);
     }
 }
 
+<<<<<<< HEAD
 let positionArray  =  [
                         [0,0,0,0,0,0,0], 
                         [0,0,0,0,0,0,0], 
@@ -88,3 +93,16 @@ let verticalWinningChecker = (aaaa) => {
 
 // indice do array 0 b r outerHeight
 // se tiver 4 b ou r
+=======
+const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
+    const firstIsntZero = disc1Color !== 0;
+
+    const otherDiscColors = [disc2Color, disc3Color, disc4Color];
+
+    const isAllTheSame = otherDiscColors.every( discColor => discColor === disc1Color );
+
+    return firstIsntZero && isAllTheSame;
+}
+
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
+>>>>>>> development
