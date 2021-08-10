@@ -1,15 +1,14 @@
 const gameContainer = document.getElementById('game-container')
 
-
-//Array bidimensional para fins de DEBUG.
-const dataArray = [
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
+let dataArray  =  [
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
+    [0,0,0,0,0,0,0], 
     [0,0,0,0,0,0,0]
-]
+  ]
+
 
 const createTemplate = () => {
     for(let i = 0; i < 7; i++){
@@ -100,6 +99,17 @@ const modifyArray = (currentAppend) => {
     }
 };
 
+ 
+let verticalWinningChecker = (aaaa) => {
+    for(let i = 0; i <= 3; i++){
+        for(let j = 0; j < 7; j++){
+            if(funcaoSeraCriadaa()){
+                
+            }
+        }
+    }
+} 
+
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     const firstIsntZero = disc1Color !== 0;
 
@@ -110,4 +120,4 @@ const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     return firstIsntZero && isAllTheSame;
 }
 
-columnsArray.forEach((item) => item.addEventListener("click", colClickhandler))
+columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
