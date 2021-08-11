@@ -48,12 +48,6 @@ const genDisc = () => {
     const newDisc = document.createElement('div');
 
     const discColor = getColor();
-    
-    if(discColor === 'black'){
-        newDisc.style.background = 'black'
-    } else {
-        newDisc.style.background = 'red'
-    }
 
     newDisc.dataset.color = discColor;
     newDisc.classList.add('disc');
