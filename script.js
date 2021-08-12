@@ -3,6 +3,7 @@ const gameContainer = document.getElementById('game-container')
 let blackScore = 0;
 let redScore = 0;
 let victoryDiv;
+let moveCount = 0;
 
 let dataArray  = [
     [0,0,0,0,0,0,0],
@@ -80,11 +81,14 @@ const colClickhandler = (event) => {
         disc.dataset.discAddress = cellDataSet;
 
         lastWithoutADisc.appendChild(disc);
+        moveCount++
         modifyArray(disc)
         checkVertical(dataArray);
         checkHorizontal(dataArray);
         checkDownLeft(dataArray);
         checkDownRight(dataArray);
+        checkDraw(moveCount)
+        switchTurns();
     }
     if ( !lastWithoutADisc ) {
         colFilledMsg(column);
@@ -151,15 +155,23 @@ const checkHorizontal = (dataBase) => {
     }
 }
 
-const counter = (appendBlack, appendRed) => {
-    if(lastColor === 'red'){
+const checkDraw = (database) => {
+    if(database === 42){
+        return victoryScreen()
+    }
+}
+
+const counter = (appendBlack, appendRed, appendDraw) => {
+    if(lastColor === 'red' && moveCount !== 42){
         blackScore++
         appendBlack.innerText = `${redScore}`;
         appendRed.innerText = `${blackScore}`
-    } else {
+    } else if(lastColor === 'black' && moveCount !== 42) {
         redScore++
         appendBlack.innerText = `${redScore}`;
         appendRed.innerText = `${blackScore}`
+    } else{
+        appendDraw.innerHTML = '<h1>THATS A DRAW</h1>'
     }
 }
 
@@ -174,6 +186,7 @@ const clearBoard = () => {
     if(victoryDiv.children[0] !== 'hidden'){
         victoryDiv.classList.add('hidden')
     }
+    columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
 }
 
 const resetButton = (appendDiv) => {
@@ -210,11 +223,27 @@ const countersContainer = (appendDiv) => {
 const counterDiv = (appendDiv) => {
     const counterP1 = document.createElement('div');
     const counterP2 = document.createElement('div');
+    const DrawDiv = document.createElement('div');
+    DrawDiv.classList.add('drawDiv');
     counterP1.classList.add('scores')
     counterP2.classList.add('scores')
-    counter(counterP1, counterP2)
+    counter(counterP1, counterP2, DrawDiv)
     appendDiv.appendChild(counterP1)
     appendDiv.appendChild(counterP2)
+    if(moveCount === 42){
+        appendDiv.appendChild(DrawDiv);
+    }
+}
+
+const switchTurns = () => {
+    let arrowDiv = document.getElementById('arrowDiv');
+    if(lastColor === 'red'){
+        arrowDiv.classList.remove('arrowRight');
+        arrowDiv.classList.add('arrowLeft');
+    } else {
+        arrowDiv.classList.remove('arrowLeft');
+        arrowDiv.classList.add('arrowRight');
+    }
 }
 
 const victoryScreen = () => {
@@ -225,4 +254,5 @@ const victoryScreen = () => {
     resetButton(victoryDiv);
     game.appendChild(victoryDiv);
     victoryDiv.classList.remove("hidden")
+    columnsArray.forEach((item) => item.removeEventListener("click", colClickhandler));
 }
