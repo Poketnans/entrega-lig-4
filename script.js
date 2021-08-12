@@ -61,7 +61,13 @@ const genDisc = () => {
 }
 
 const colFilledMsg = (columnNode) => {
-    columnNode.classList.add('filledColumnError');
+    const errorClass = 'filledColumnError'
+
+    columnNode.classList.add(errorClass);
+
+    setTimeout( function () {
+        columnNode.classList.remove(errorClass);        
+    }, 300 );
 }
 
 const colClickhandler = (event) => {
