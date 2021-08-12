@@ -71,6 +71,24 @@ h1{
     height: 32px;
 }
 
+.filledColumnError {
+    animation: errorAnimation .3s linear;
+}
+
+@keyframes errorAnimation {
+    0% {transform: translate(0);}
+    10% {transform: translate(-5px);}
+    20% {transform: translate(5px);}
+    30% {transform: translate(-5px);}
+    40% {transform: translate(5px);}
+    50% {transform: translate(-5px);}
+    60% {transform: translate(5px);}
+    70% {transform: translate(-5px);}
+    80% {transform: translate(5px);}
+    90% {transform: translate(-5px);}
+    100% {transform: translate(0);}   
+}
+
 @media (min-width: 425px){
     #game-container{
         width: calc(49px * 7 + 7px);
