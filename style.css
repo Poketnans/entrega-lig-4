@@ -83,83 +83,6 @@ h1{
     height: 32px;
 }
 
-@media (min-width: 425px){
-    #game-container{
-        width: calc(49px * 7 + 7px);
-        height: calc(53px * 6 + 7px);
-    }
-    .line{
-        width: 40px;
-        height: 40px;
-    }
-    .disc{
-        width: 40px;
-        height: 40px;
-    }
-    #game-container::before{
-        height: 249.68px;
-        width: 9px;
-    }
-    
-    #game-container::after{
-        height: 249.68px;
-        width: 9px;
-    }
-}
-
-@media (min-width: 600px){
-    #game-container{
-        width: calc(54px * 7 + 7px);
-        height: calc(58px * 6 + 7px);
-    }
-    .line{
-        width: 44px;
-        height: 44px;
-    }
-    .disc{
-        width: 44px;
-        height: 44px;
-    }
-    #game-container::before{
-        height: 272.68px;
-        width: 10px;
-    }
-    
-    #game-container::after{
-        height: 272.68px;
-        width: 10px;
-    }
-}
-
-@media (min-width: 768px){
-    #game-container{
-        width: calc(60px * 7 + 7px);
-        height: calc(64px * 6 + 7px);
-        }
-    .line{
-        width: 50px;
-        height: 50px; 
-    }
-    .disc{
-        width: 50px;
-        height: 50px; 
-    }
-    .column:hover{
-        background-color: #8A79A5;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    #game-container::before{
-        height: 301.68px;
-        width: 11px;
-    }
-    
-    #game-container::after{
-        height: 301.68px;
-        width: 11px;
-    }
-}
-
 .disc {
     position: relative;
     border-radius: 50%;
@@ -231,7 +154,7 @@ h1{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    position: relative;
+    /* position: relative; */
     animation: victoryScreenCall .1s ease-in-out 0s forwards;
     content: "";
     position: absolute;
@@ -247,7 +170,7 @@ h1{
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     animation: victoryScreenBlur 1s linear 0.5s forwards;
     opacity: 0;
-}
+};
 
 .playersDiv{
     display: flex;
