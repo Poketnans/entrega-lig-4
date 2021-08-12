@@ -206,9 +206,10 @@ h1{
 .victoryScreen::before {
     content: "";
     position: absolute;
-    top: -10px;
-    width: 95vw;
-    height: 95vw;
+    bottom: 50%;
+    transform: translateY(-50%);
+    width: 89vw;
+    height: 50vw;
     max-width: 400px;
     max-height: 350px;
     z-index: -1;

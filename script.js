@@ -1,3 +1,4 @@
+const game = document.getElementById("game-flex")
 const gameContainer = document.getElementById('game-container')
 
 let dataArray  = [
@@ -112,6 +113,7 @@ const checkDownRight = (dataBase) => {
         for(let column = 0; column < 4; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
                 console.log('entrouDiagonalDireita')
+                victoryScreen()
             }
         }
     }
@@ -122,6 +124,7 @@ const checkDownLeft = (dataBase) => {
         for(column = 3; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
                 console.log('entrouDiagonalEsquerda')
+                victoryScreen()
             }
         }
     }
@@ -132,6 +135,7 @@ const checkVertical = (dataBase) => {
         for(let column = 0; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
                 console.log('entrouVertical')
+                victoryScreen()
             }
         }
     }
@@ -142,7 +146,15 @@ const checkHorizontal = (dataBase) => {
         for(let column = 0; column < 5; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
                 console.log('entrouHorizontal')
+                victoryScreen()
             }
         }
     }
+}
+
+const victoryScreen = () => {
+    const victoryDiv = document.createElement("div")
+    victoryDiv.classList.add("victoryScreen", "hidden")
+    game.appendChild(victoryDiv)
+    victoryDiv.classList.remove("hidden")
 }
