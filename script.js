@@ -1,5 +1,8 @@
 const game = document.getElementById("game-flex")
 const gameContainer = document.getElementById('game-container')
+let blackScore = 0;
+let redScore = 0;
+let victoryDiv;
 
 let dataArray  = [
     [0,0,0,0,0,0,0],
@@ -112,7 +115,6 @@ const checkDownRight = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(let column = 0; column < 4; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
-                console.log('entrouDiagonalDireita')
                 victoryScreen()
             }
         }
@@ -123,7 +125,6 @@ const checkDownLeft = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(column = 3; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
-                console.log('entrouDiagonalEsquerda')
                 victoryScreen()
             }
         }
@@ -134,7 +135,6 @@ const checkVertical = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(let column = 0; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
-                console.log('entrouVertical')
                 victoryScreen()
             }
         }
@@ -145,16 +145,84 @@ const checkHorizontal = (dataBase) => {
     for(let line = 0; line < 6; line++){
         for(let column = 0; column < 5; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
-                console.log('entrouHorizontal')
                 victoryScreen()
             }
         }
     }
 }
 
+const counter = (appendBlack, appendRed) => {
+    if(lastColor === 'red'){
+        blackScore++
+        appendBlack.innerText = `${redScore}`;
+        appendRed.innerText = `${blackScore}`
+    } else {
+        redScore++
+        appendBlack.innerText = `${redScore}`;
+        appendRed.innerText = `${blackScore}`
+    }
+}
+
+const clearBoard = () => {
+    const parents = document.querySelectorAll('[data-column-line]')
+    for(let i = 0; i < parents.length; i++){
+        if(parents[i].hasChildNodes()){
+            let discAddress = parents[i].firstChild
+            parents[i].removeChild(discAddress)
+        }
+    }
+    if(victoryDiv.children[0] !== 'hidden'){
+        victoryDiv.classList.add('hidden')
+    }
+}
+
+const resetButton = (appendDiv) => {
+    const resetButton = document.createElement('button');
+    resetButton.setAttribute('id', 'playAgain');
+    resetButton.innerText = 'Play Again?'
+    appendDiv.appendChild(resetButton)
+    resetButton.addEventListener('click', clearBoard)
+}
+
+const addPlayers = (appendDiv) => {
+    const player1 = document.createElement("div")
+    const player2 = document.createElement("div")
+    player1.classList.add('player1')
+    player2.classList.add('player2')
+    appendDiv.appendChild(player1)
+    appendDiv.appendChild(player2)
+}
+
+const playersDiv = (appendDiv) => {
+    const playersDiv = document.createElement('div');
+    playersDiv.classList.add('playersDiv')
+    addPlayers(playersDiv)
+    appendDiv.appendChild(playersDiv)
+}
+
+const countersContainer = (appendDiv) => {
+    const countersContainer = document.createElement('div');
+    countersContainer.setAttribute('id', 'counterContainer');
+    counterDiv(countersContainer);
+    appendDiv.appendChild(countersContainer);
+}
+
+const counterDiv = (appendDiv) => {
+    const counterP1 = document.createElement('div');
+    const counterP2 = document.createElement('div');
+    counterP1.classList.add('scores')
+    counterP2.classList.add('scores')
+    counter(counterP1, counterP2)
+    appendDiv.appendChild(counterP1)
+    appendDiv.appendChild(counterP2)
+}
+
 const victoryScreen = () => {
-    const victoryDiv = document.createElement("div")
-    victoryDiv.classList.add("victoryScreen", "hidden")
-    game.appendChild(victoryDiv)
+    victoryDiv = document.createElement("div");
+    victoryDiv.classList.add("victoryScreen");
+    countersContainer(victoryDiv);
+    playersDiv(victoryDiv);
+    resetButton(victoryDiv);
+    game.appendChild(victoryDiv);
     victoryDiv.classList.remove("hidden")
 }
