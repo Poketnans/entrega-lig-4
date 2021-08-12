@@ -5,9 +5,6 @@ let redScore = 0;
 let victoryDiv;
 let moveCount = 0;
 
-let moveCount = 0
-let victoryDiv;
-
 let dataArray  = [
     [0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0], 
@@ -278,10 +275,7 @@ const switchTurns = () => {
     }
 }
 
-const victoryScreen = () => {
-    victoryDiv = document.createElement("div");
-    victoryDiv.classList.add("victoryScreen");
-    countersContainer(victoryDiv);
+
 const victoryScreen = () => {
     victoryDiv = document.createElement("div");
     victoryDiv.classList.add("victoryScreen");
@@ -291,5 +285,4 @@ const victoryScreen = () => {
     game.appendChild(victoryDiv);
     victoryDiv.classList.remove("hidden")
     columnsArray.forEach((item) => item.removeEventListener("click", colClickhandler));
-}
 }

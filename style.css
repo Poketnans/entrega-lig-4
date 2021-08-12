@@ -18,10 +18,6 @@ body{
     font-family: 'Baloo Tammudu 2', cursive;
 }
 
-.victoryScreen.hidden {
-    display: none;
-}
-
 main{
     height: 80vh;
     display: flex;
@@ -120,7 +116,6 @@ h1{
     align-items: center;
     position: absolute;
     animation: victoryScreenCall .5s ease-in-out 0s forwards;
-    /* z-index: -1; */
     bottom: 50%;
     transform: translateY(48%);
     width: calc(40px * 7 + 7px);
