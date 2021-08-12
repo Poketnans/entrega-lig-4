@@ -201,9 +201,22 @@ h1{
 .victoryScreen {
     position: relative;
     animation: victoryScreenCall .5s ease-in-out 0s forwards;
+    bottom: 50%;
+    transform: translateY(-50%);
+    width: 89vw;
+    height: 50vw;
+    max-width: 400px;
+    max-height: 350px;
+    z-index: -1;
+    box-shadow: 0 5px 10px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 2.9px );
+    border-radius: 5px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    animation: victoryScreenBlur 1s linear 0.5s forwards;
+    opacity: 0;
 }
 
-.victoryScreen::before {
+/* .victoryScreen::before {
     content: "";
     position: absolute;
     bottom: 50%;
@@ -219,7 +232,7 @@ h1{
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     animation: victoryScreenBlur 1s linear 0.5s forwards;
     opacity: 0;
-}
+} */
 
 @keyframes victoryScreenCall {
     0.0%{
