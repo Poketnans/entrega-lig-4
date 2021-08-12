@@ -283,17 +283,8 @@ const counterDiv = (appendDiv) => {
     const counterP2 = document.createElement('div');
     const DrawDiv = document.createElement('div');
     DrawDiv.classList.add('drawDiv');
-    counterP1.classList.add('scores')
-    counterP2.classList.add('scores')
     counter(counterP1, counterP2, DrawDiv)
-    appendDiv.appendChild(counterP1)
-    appendDiv.appendChild(counterP2)
     if(moveCount === 42){
-        if(appendDiv.hasChildNodes){
-            appendDiv.appendChild(DrawDiv);
-            appendDiv.removeChild(counterP1);
-            appendDiv.removeChild(counterP2);
-        }
         appendDiv.appendChild(DrawDiv);
     }
 }
