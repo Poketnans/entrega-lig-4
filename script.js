@@ -137,7 +137,8 @@ const checkDownRight = (dataBase) => {
         for(let column = 0; column < 4; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
                 show4inARow(line, line + 1, line + 2, line + 3,column,column + 1, column + 2, column + 3)
-                victoryScreen()
+                let showVictory = victoryScreen()
+                return showVictory
             }
         }
     }
@@ -148,7 +149,8 @@ const checkDownLeft = (dataBase) => {
         for(column = 3; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
                 show4inARow(line, line + 1, line + 2, line + 3,column,column - 1, column - 2, column - 3)
-                victoryScreen()
+                let showVictory = victoryScreen()
+                return showVictory
             }
         }
     }
@@ -159,7 +161,8 @@ const checkVertical = (dataBase) => {
         for(let column = 0; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
                 show4inARow(line, line + 1, line + 2, line + 3,column,column, column, column)
-                victoryScreen()
+                let showVictory = victoryScreen()
+                return showVictory
             }
         }
     }
@@ -167,10 +170,11 @@ const checkVertical = (dataBase) => {
 
 const checkHorizontal = (dataBase) => {
     for(let line = 0; line < 6; line++){
-        for(let column = 0; column < 5; column++){
+        for(let column = 0; column < 4; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
                 show4inARow(line, line, line, line,column,column + 1, column + 2, column + 3)
-                victoryScreen()
+                let showVictory = victoryScreen()
+                return showVictory
             }
         }
     }
@@ -178,7 +182,8 @@ const checkHorizontal = (dataBase) => {
 
 const checkDraw = (database) => {
     if(database === 42){
-        return victoryScreen()
+        let showVictory = victoryScreen()
+        return showVictory
     }
 }
 
