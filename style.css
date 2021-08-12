@@ -37,6 +37,28 @@ main{
     width: calc(40px * 7 + 7px);
     height: calc(44px * 6 + 7px);
     border: solid rgb(82 80 80) 2px;
+    position: relative;
+}
+
+
+#game-container::before{
+    content: '';
+    background-color: #C7B1EC;
+    height: 207.68px;
+    width: 8px;
+    position: absolute;
+    border-radius: 2.66px;
+    left: 0;
+}
+
+#game-container::after{
+    content: '';
+    background-color: #C7B1EC;
+    height: 207.68px;
+    width: 8px;
+    position: absolute;
+    border-radius: 2.66px;
+    right: 0;
 }
 
 h1{
@@ -62,6 +84,15 @@ h1{
         width: 40px;
         height: 40px;
     }
+    #game-container::before{
+        height: 249.68px;
+        width: 9px;
+    }
+    
+    #game-container::after{
+        height: 249.68px;
+        width: 9px;
+    }
 }
 
 @media (min-width: 600px){
@@ -76,6 +107,15 @@ h1{
     .disc{
         width: 44px;
         height: 44px;
+    }
+    #game-container::before{
+        height: 272.68px;
+        width: 10px;
+    }
+    
+    #game-container::after{
+        height: 272.68px;
+        width: 10px;
     }
 }
 
@@ -96,6 +136,15 @@ h1{
         background-color: #8A79A5;
         border-radius: 10px;
         cursor: pointer;
+    }
+    #game-container::before{
+        height: 301.68px;
+        width: 11px;
+    }
+    
+    #game-container::after{
+        height: 301.68px;
+        width: 11px;
     }
 }
 
