@@ -14,6 +14,7 @@ const createTemplate = () => {
     for(let i = 0; i < 7; i++){
         let column = document.createElement('div')
         gameContainer.appendChild(column)
+        column.classList.add('column')
 
         for(let j = 5; j >= 0; j--){
             let line = document.createElement('div')
