@@ -187,6 +187,15 @@ const clearBoard = () => {
         victoryDiv.classList.add('hidden')
     }
     columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
+    dataArray = [
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0], 
+            [0,0,0,0,0,0,0], 
+            [0,0,0,0,0,0,0], 
+            [0,0,0,0,0,0,0], 
+            [0,0,0,0,0,0,0]
+    ]
+    moveCount = 0;
 }
 
 const resetButton = (appendDiv) => {
@@ -231,6 +240,11 @@ const counterDiv = (appendDiv) => {
     appendDiv.appendChild(counterP1)
     appendDiv.appendChild(counterP2)
     if(moveCount === 42){
+        if(appendDiv.hasChildNodes){
+            appendDiv.appendChild(DrawDiv);
+            appendDiv.removeChild(counterP1);
+            appendDiv.removeChild(counterP2);
+        }
         appendDiv.appendChild(DrawDiv);
     }
 }
