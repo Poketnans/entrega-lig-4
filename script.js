@@ -138,6 +138,9 @@ const checkDownRight = (dataBase) => {
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
                 show4inARow(line, line + 1, line + 2, line + 3,column,column + 1, column + 2, column + 3)
                 let showVictory = victoryScreen()
+
+                tranfVictoryCounter()
+                
                 return showVictory
             }
         }
@@ -150,6 +153,9 @@ const checkDownLeft = (dataBase) => {
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
                 show4inARow(line, line + 1, line + 2, line + 3,column,column - 1, column - 2, column - 3)
                 let showVictory = victoryScreen()
+
+                tranfVictoryCounter()
+                
                 return showVictory
             }
         }
@@ -162,6 +168,9 @@ const checkVertical = (dataBase) => {
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
                 show4inARow(line, line + 1, line + 2, line + 3,column,column, column, column)
                 let showVictory = victoryScreen()
+
+                tranfVictoryCounter()
+                
                 return showVictory
             }
         }
@@ -174,6 +183,9 @@ const checkHorizontal = (dataBase) => {
             if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
                 show4inARow(line, line, line, line,column,column + 1, column + 2, column + 3)
                 let showVictory = victoryScreen()
+
+                tranfVictoryCounter()
+
                 return showVictory
             }
         }
@@ -183,6 +195,9 @@ const checkHorizontal = (dataBase) => {
 const checkDraw = (database) => {
     if(database === 42){
         let showVictory = victoryScreen()
+
+        tranfVictoryCounter()
+
         return showVictory
     }
 }
@@ -191,11 +206,17 @@ const counter = (appendBlack, appendRed, appendDraw) => {
     if(lastColor === 'red' && moveCount !== 42){
         blackScore++
         appendBlack.innerText = `${redScore}`;
-        appendRed.innerText = `${blackScore}`
+        appendRed.innerText = `${blackScore}`;
+
+        mainScoreUpdate('black');
+
     } else if(lastColor === 'black' && moveCount !== 42) {
         redScore++
         appendBlack.innerText = `${redScore}`;
-        appendRed.innerText = `${blackScore}`
+        appendRed.innerText = `${blackScore}`;
+
+        mainScoreUpdate('red');
+
     } else{
         appendDraw.innerHTML = '<h1>THATS A DRAW</h1>'
     }
@@ -222,6 +243,8 @@ const clearBoard = () => {
             [0,0,0,0,0,0,0],
     ]
     moveCount = 0;
+
+    returnVictoryCounter();
 }
 
 const resetButton = (appendDiv) => {
@@ -297,3 +320,70 @@ const victoryScreen = () => {
     victoryDiv.classList.remove("hidden")
     columnsArray.forEach((item) => item.removeEventListener("click", colClickhandler));
 }
+
+const crateVictoryCounter = (color) => {
+    const newCounter = document.createElement('div');
+
+    newCounter.classList.add('victoryCounter');
+    newCounter.innerText = 0;
+    newCounter.id = `${color}Counter`;
+    
+    return newCounter;
+}
+
+const mainVictoryCounter = () => {
+    const header = document.querySelector('#header');
+    
+    const mainCounterDiv = document.createElement('div');
+    mainCounterDiv.classList.add('mainCounterDiv');
+    mainCounterDiv.classList.add('vicCounterInitial');
+    
+    const blackCounter = crateVictoryCounter('black');
+    const redCounter = crateVictoryCounter('red');
+
+    mainCounterDiv.appendChild(redCounter);
+    mainCounterDiv.appendChild(blackCounter);
+    
+    header.appendChild(mainCounterDiv);
+}
+
+const mainScoreUpdate = (color) => {
+    const counter = document.querySelector(`#${color}Counter`);
+
+    const correspCounter = {
+        black: blackScore,
+        red: redScore
+    };
+
+    const score = correspCounter[color];
+    counter.innerText = score;
+}
+
+const tranfVictoryCounter = () => {
+    const mainCounterDiv = document.querySelector('.mainCounterDiv');
+    mainCounterDiv.classList.add('toVictoryScreen');
+
+    const gameFlex = document.querySelector('#game-flex');
+    const lastVictoryScreen = gameFlex.lastChild;
+
+    setTimeout ( function () {
+        mainCounterDiv.classList.remove('toVictoryScreen');
+        mainCounterDiv.classList.add('vicCounterVicScreen');
+        lastVictoryScreen.appendChild(mainCounterDiv);
+    }, 1000 )
+}
+
+const returnVictoryCounter = () => {
+    const mainCounterDiv = document.querySelector('.mainCounterDiv');
+    mainCounterDiv.classList.add('returnVictoryCounter');
+    mainCounterDiv.classList.remove('vicCounterVicScreen');
+
+    const header = document.querySelector('#header');
+    header.appendChild(mainCounterDiv);
+
+    setTimeout ( function () {
+        mainCounterDiv.classList.remove('returnVictoryCounter');
+    }, 1000 )
+}
+
+mainVictoryCounter()

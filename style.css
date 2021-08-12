@@ -167,6 +167,78 @@ h1{
     cursor: pointer;
 }
 
+.mainCounterDiv {
+    height: 50px;
+    display: flex;
+    background-size: 40px;
+    background-image: url('/trophy.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+}
+
+.vicCounterInitial {
+    justify-content: space-between;
+    width: 250px;
+    left: calc(50% - 125px);
+    top: 100px;
+}
+
+.vicCounterVicScreen {
+    justify-content: space-around;
+    width: 100%;
+    top: 50px;
+    left: unset;
+    background-color: rgba(216, 192, 216, 0.3);
+}
+
+    .victoryCounter {
+        font-size: 45px;
+        font-weight: bold;
+        line-height: 1.5em;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        text-shadow: 0 5px 5px rgb(83, 79, 79);
+    }
+
+    #redCounter {
+        color: #c93636;
+    }
+
+.toVictoryScreen {
+    animation: toVictoryScreen 1s ease forwards;
+    animation-delay: 0.5s;
+    transition: top 1s;
+}
+
+.returnVictoryCounter {
+    animation: returnVictoryCounter 1s ease forwards;
+    top: 250px;
+    opacity: 0.5;
+    transition: top 1s;
+    transform: scale(1.2);
+    z-index: 2;
+}
+
+@keyframes toVictoryScreen {
+    to {
+        z-index: 2;
+        top: 220px;
+        opacity: 0;
+        transform: scale(1.2);
+    }    
+}
+
+@keyframes returnVictoryCounter {
+    to {
+        z-index: 0;
+        top: 100px;
+        opacity: 1;
+        transform: scale(1);
+    }    
+}
+
 @media (min-width: 425px){
     #game-container{
         width: calc(49px * 7 + 7px);
@@ -302,7 +374,9 @@ h1{
 }
 
 .drawDiv{
-    transform: translateX(-6%);
+    position: relative;
+    top: -30%;
+    /* transform: translateX(-6%); */
 }
 
 .victoryScreen {
@@ -472,7 +546,7 @@ h1{
     }
 
     .drawDiv{
-        transform: translateX(-15%);
+        /* transform: translateX(-15%); */
     }
 }
 
@@ -497,7 +571,8 @@ h1{
     }
 
     .drawDiv{
-        transform: translateX(-19%);
+        top: -35%;
+        /* transform: translateX(-19%); */
     }
 
     .victoryScreen{
@@ -539,6 +614,7 @@ h1{
     }
 
     .drawDiv{
-        transform: translateX(-4%);
+        top: 80%;
+        /* transform: translateX(-4%); */
     }
 }
