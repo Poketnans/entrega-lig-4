@@ -22,6 +22,13 @@ body{
     display: none;
 }
 
+main{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .line{
     border-radius: 88.75px;
     width: 32px;
@@ -30,13 +37,6 @@ body{
     box-shadow: inset 0 0 0.4em rgb(53 53 53);
     background-color: white;
     border: 1px solid black;
-}
-
-main{
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #game-container{
@@ -83,6 +83,10 @@ h1{
     height: 32px;
 }
 
+.filledColumnError {
+    animation: errorAnimation .3s linear;
+}
+
 .disc {
     position: relative;
     border-radius: 50%;
@@ -103,6 +107,163 @@ h1{
     #202020 0%, 
     rgb(24, 22, 22) 100%);
     border: ridge 5px #4c4747;
+}
+
+.victoryScreen.hidden {
+    display: none;
+}
+
+.victoryScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    animation: victoryScreenCall .5s ease-in-out 0s forwards;
+    /* z-index: -1; */
+    bottom: 50%;
+    transform: translateY(48%);
+    width: calc(40px * 7 + 7px);
+    height: calc(44px * 6 + 7px);
+    backdrop-filter: blur( 2.9px );
+    box-shadow: 0 5px 10px 0 rgba( 31, 38, 135, 0.37 );
+    border-radius: 20px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    animation: victoryScreenBlue 1s linear 0.5s forwards;
+}
+
+.playersDiv {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.player1, .player2 {
+    border-radius: 88.75px;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    border-radius: 50%;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.player1 {
+    background: radial-gradient(
+    #bd3e3e 0%, 
+    rgb(177, 23, 23) 100%);
+    border: ridge 5px #e44040;
+}
+
+.player2 {
+    background: radial-gradient(
+    #202020 0%, 
+    rgb(24, 22, 22) 100%);
+    border: ridge 5px #4c4747;
+}
+
+#playAgain {
+    width: 151px;
+    height: 49px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: radial-gradient(50% 50% at 50% 50%, #FF0000 0%, rgba(3, 3, 3, 0.75) 100%);
+    border-radius: 16px;
+    text-align: center;
+    color: #FFECEC;
+    cursor: pointer;
+}
+
+@media (min-width: 425px){
+    #game-container{
+        width: calc(49px * 7 + 7px);
+        height: calc(53px * 6 + 7px);
+    }
+    .line{
+        width: 40px;
+        height: 40px;
+    }
+    .disc{
+        width: 40px;
+        height: 40px;
+    }
+    #game-container::before{
+        height: 249.68px;
+        width: 9px;
+    }
+    
+    #game-container::after{
+        height: 249.68px;
+        width: 9px;
+    }
+
+    .victoryScreen {
+        width: calc(49px * 7 + 7px);
+        height: calc(49px * 6 + 7px);
+    }
+}
+
+@media (min-width: 600px){
+    #game-container{
+        width: calc(54px * 7 + 7px);
+        height: calc(58px * 6 + 7px);
+    }
+    .line{
+        width: 44px;
+        height: 44px;
+    }
+    .disc{
+        width: 44px;
+        height: 44px;
+    }
+    #game-container::before{
+        height: 272.68px;
+        width: 10px;
+    }
+    
+    #game-container::after{
+        height: 272.68px;
+        width: 10px;
+    }
+
+    .victoryScreen {
+        width: calc(54px * 7 + 7px);
+        height: calc(54px * 6 + 7px);
+    }
+}
+
+@media (min-width: 768px){
+    #game-container{
+        width: calc(60px * 7 + 7px);
+        height: calc(64px * 6 + 7px);
+        }
+    .line{
+        width: 50px;
+        height: 50px; 
+    }
+    .disc{
+        width: 50px;
+        height: 50px; 
+    }
+    .column:hover{
+        background-color: #8A79A5;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    #game-container::before{
+        height: 301.68px;
+        width: 11px;
+    }
+    
+    #game-container::after{
+        height: 301.68px;
+        width: 11px;
+    }
+
+    .victoryScreen {
+        max-width: 100%;
+        max-height: 100%;
+        width: calc(60px * 7 + 7px);
+        height: calc(64px * 6 + 7px);
+    }
 }
 
 #footerDiscRed{
@@ -265,6 +426,20 @@ h1{
     100%{
         transform: scale(1);
     }
+}
+
+@keyframes errorAnimation {
+    0% {transform: translate(0);}
+    10% {transform: translate(-5px);}
+    20% {transform: translate(5px);}
+    30% {transform: translate(-5px);}
+    40% {transform: translate(5px);}
+    50% {transform: translate(-5px);}
+    60% {transform: translate(5px);}
+    70% {transform: translate(-5px);}
+    80% {transform: translate(5px);}
+    90% {transform: translate(-5px);}
+    100% {transform: translate(0);}   
 }
 
 @keyframes victoryScreenBlur {
