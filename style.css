@@ -264,7 +264,12 @@ h1{
 }
 
 .scores{
+    width: 55px;
+    height: 55px;
+    text-align: center;
     font-size: 30px;
+    border-radius: 50%;
+    background-color: cyan;
 }
 
 .player1{
