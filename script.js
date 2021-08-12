@@ -111,6 +111,17 @@ const modifyArray = (currentAppend) => {
 
 columnsArray.forEach((item) => item.addEventListener("click", colClickhandler));
 
+const show4inARow = (line1, line2, line3, line4, column1, column2, column3, column4) => {
+    let first = document.querySelector(`div[data-column-line='${line1}-${column1}']`);
+    let second = document.querySelector(`div[data-column-line='${line2}-${column2}']`);
+    let third = document.querySelector(`div[data-column-line='${line3}-${column3}']`);
+    let fourth = document.querySelector(`div[data-column-line='${line4}-${column4}']`);
+    first.firstChild.style.background = 'yellow'
+    second.firstChild.style.background = 'yellow'
+    third.firstChild.style.background = 'yellow'
+    fourth.firstChild.style.background = 'yellow'
+}
+
 const checkColorMatch = (disc1Color, disc2Color, disc3Color, disc4Color) => {
     return ((disc1Color !== 0) && (disc1Color === disc2Color) && (disc1Color === disc2Color) && (disc1Color === disc3Color) && (disc1Color === disc4Color))
 }
@@ -119,6 +130,7 @@ const checkDownRight = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(let column = 0; column < 4; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column + 1], dataBase[line + 2][column + 2], dataBase[line + 3][column + 3])){
+                show4inARow(line, line + 1, line + 2, line + 3,column,column + 1, column + 2, column + 3)
                 victoryScreen()
             }
         }
@@ -129,6 +141,7 @@ const checkDownLeft = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(column = 3; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column - 1], dataBase[line + 2][column - 2], dataBase[line + 3][column - 3])){
+                show4inARow(line, line + 1, line + 2, line + 3,column,column - 1, column - 2, column - 3)
                 victoryScreen()
             }
         }
@@ -139,6 +152,7 @@ const checkVertical = (dataBase) => {
     for(let line = 0; line < 3; line++){
         for(let column = 0; column < 7; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line + 1][column], dataBase[line + 2][column], dataBase[line + 3][column])){
+                show4inARow(line, line + 1, line + 2, line + 3,column,column, column, column)
                 victoryScreen()
             }
         }
@@ -149,6 +163,7 @@ const checkHorizontal = (dataBase) => {
     for(let line = 0; line < 6; line++){
         for(let column = 0; column < 5; column++){
             if(checkColorMatch(dataBase[line][column], dataBase[line][column + 1], dataBase[line][column + 2], dataBase[line][column + 3])){
+                show4inARow(line, line, line, line,column,column + 1, column + 2, column + 3)
                 victoryScreen()
             }
         }
