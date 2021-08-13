@@ -177,7 +177,7 @@ h1{
     height: 50px;
     display: flex;
     background-size: 40px;
-    background-image: url('/trophy.svg');
+    background-image: url('./trophy.svg');
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;
