@@ -88,7 +88,9 @@ h1{
     border-radius: 50%;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    animation: yourAnimation 1s ease-in 0s normal none;
+    animation-name: yourAnimation;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
 }
 
 .disc[data-color="red"] {
@@ -328,7 +330,7 @@ h1{
     cursor: pointer;
 }
 
-@keyframes yourAnimation {
+/* @keyframes yourAnimation {
     0.0%{
         transform: translate(0, -300px);
         height: 100%;
@@ -350,6 +352,42 @@ h1{
         height: 100%;
     }
     100%{
+        height: 100%;
+        transform: translate(0);
+    }
+} */
+
+.disc {
+    animation-fill-mode: forwards;
+}
+
+@keyframes yourAnimation {
+    0.0%{
+        /* transform: translate(0, -300px); */
+        height: 100%;
+    }
+    50%{
+        top: 0;
+        height: 98%;
+        /* transform: translate(0); */
+    }
+    56%{
+        top: 10px;
+        height: 80%;
+        /* transform: translate(0, 10px); */
+    }
+    65%{
+        top: 25px;
+        /* transform: translate(0, 25px); */
+        height: 50%;
+    }
+    85%{
+        top: 0;
+        /* transform: translate(0); */
+        height: 100%;
+    }
+    100%{
+        top: 0;
         height: 100%;
         transform: translate(0);
     }

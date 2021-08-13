@@ -71,6 +71,17 @@ const colFilledMsg = (columnNode) => {
     }, 300 );
 }
 
+const setDiscFallBeginning = (disc, cellAddress, column ) => {
+    const lineNum = Number(cellAddress.substring(0, 1));
+    const colHeight = Number(column.clientHeight);
+    const cellSection = colHeight / 6;
+    const velocity = colHeight - cellSection;
+    const initialDistance = colHeight - (lineNum * cellSection);
+    const timeAnimation = initialDistance / velocity;
+    disc.style.top = `-${initialDistance}px`;
+    disc.style.animationDuration = `${timeAnimation}s`;
+}
+
 const colClickhandler = (event) => {
     const column = event.currentTarget;
 
@@ -87,6 +98,9 @@ const colClickhandler = (event) => {
         disc.dataset.discAddress = cellDataSet;
 
         lastWithoutADisc.appendChild(disc);
+
+        setDiscFallBeginning(disc, cellDataSet, column);
+
         moveCount++
         modifyArray(disc)
         checkVertical(dataArray);
