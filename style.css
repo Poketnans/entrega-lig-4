@@ -112,20 +112,26 @@ h1{
 .victoryScreen {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    position: relative;
+    padding: 28px;
+    animation: victoryScreenCall 1s ease-in-out 0s forwards;
+    animation: victoryScreenBlur 1s linear 0.5s forwards;
+    content: "";
     position: absolute;
-    animation: victoryScreenCall .5s ease-in-out 0s forwards;
     bottom: 50%;
     transform: translateY(48%);
     width: calc(40px * 7 + 7px);
-    height: calc(44px * 6 + 7px);
-    backdrop-filter: blur( 2.9px );
+    height: calc(40px * 6 + 7px);
+    max-width: 400px;
+    z-index: -1;
     box-shadow: 0 5px 10px 0 rgba( 31, 38, 135, 0.37 );
-    border-radius: 20px;
+    backdrop-filter: blur( 2.9px );
+    border-radius: 5px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    animation: victoryScreenBlue 1s linear 0.5s forwards;
-}
+    opacity: 0;
+};
 
 .playersDiv {
     display: flex;
@@ -187,29 +193,29 @@ h1{
 .vicCounterVicScreen {
     justify-content: space-around;
     width: 100%;
-    top: 50px;
+    top: 76px;
     left: unset;
     background-color: rgba(216, 192, 216, 0.3);
 }
 
-    .victoryCounter {
-        font-size: 45px;
-        font-weight: bold;
-        line-height: 1.5em;
-        width: 50px;
-        height: 50px;
-        text-align: center;
-        text-shadow: 0 5px 5px rgb(83, 79, 79);
-    }
+.victoryCounter {
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1.5em;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    text-shadow: 0 5px 5px rgb(83, 79, 79);
+}
 
-    #redCounter {
-        color: #c93636;
-    }
+#redCounter {
+    color: #c93636;
+}
 
 .toVictoryScreen {
     animation: toVictoryScreen 1s ease forwards;
-    animation-delay: 0.5s;
-    transition: top 1s;
+    /* animation-delay: 0.5s; */
+    transition: top 5s;
 }
 
 .returnVictoryCounter {
@@ -219,118 +225,6 @@ h1{
     transition: top 1s;
     transform: scale(1.2);
     z-index: 2;
-}
-
-@keyframes toVictoryScreen {
-    to {
-        z-index: 2;
-        top: 220px;
-        opacity: 0;
-        transform: scale(1.2);
-    }    
-}
-
-@keyframes returnVictoryCounter {
-    to {
-        z-index: 0;
-        top: 100px;
-        opacity: 1;
-        transform: scale(1);
-    }    
-}
-
-@media (min-width: 425px){
-    #game-container{
-        width: calc(49px * 7 + 7px);
-        height: calc(53px * 6 + 7px);
-    }
-    .line{
-        width: 40px;
-        height: 40px;
-    }
-    .disc{
-        width: 40px;
-        height: 40px;
-    }
-    #game-container::before{
-        height: 249.68px;
-        width: 9px;
-    }
-    
-    #game-container::after{
-        height: 249.68px;
-        width: 9px;
-    }
-
-    .victoryScreen {
-        width: calc(49px * 7 + 7px);
-        height: calc(49px * 6 + 7px);
-    }
-}
-
-@media (min-width: 600px){
-    #game-container{
-        width: calc(54px * 7 + 7px);
-        height: calc(58px * 6 + 7px);
-    }
-    .line{
-        width: 44px;
-        height: 44px;
-    }
-    .disc{
-        width: 44px;
-        height: 44px;
-    }
-    #game-container::before{
-        height: 272.68px;
-        width: 10px;
-    }
-    
-    #game-container::after{
-        height: 272.68px;
-        width: 10px;
-    }
-
-    .victoryScreen {
-        width: calc(54px * 7 + 7px);
-        height: calc(54px * 6 + 7px);
-    }
-}
-
-@media (min-width: 768px){
-    #game-container{
-        width: calc(60px * 7 + 7px);
-        height: calc(64px * 6 + 7px);
-        }
-    .line{
-        width: 50px;
-        height: 50px; 
-    }
-    .disc{
-        width: 50px;
-        height: 50px; 
-    }
-    .column:hover{
-        background-color: #8A79A5;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    #game-container::before{
-        height: 301.68px;
-        width: 11px;
-    }
-    
-    #game-container::after{
-        height: 301.68px;
-        width: 11px;
-    }
-
-    .victoryScreen {
-        max-width: 100%;
-        max-height: 100%;
-        width: calc(60px * 7 + 7px);
-        height: calc(64px * 6 + 7px);
-    }
 }
 
 #footerDiscRed{
@@ -376,31 +270,7 @@ h1{
 .drawDiv{
     position: relative;
     top: -30%;
-    /* transform: translateX(-6%); */
 }
-
-.victoryScreen {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    /* position: relative; */
-    animation: victoryScreenCall .1s ease-in-out 0s forwards;
-    content: "";
-    position: absolute;
-    bottom: 50%;
-    transform: translateY(48%);
-    width: calc(40px * 7 + 7px);
-    height: calc(40px * 6 + 7px);
-    max-width: 400px;
-    z-index: -1;
-    box-shadow: 0 5px 10px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 2.9px );
-    border-radius: 5px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    animation: victoryScreenBlur 1s linear 0.5s forwards;
-    opacity: 0;
-};
 
 .playersDiv{
     display: flex;
@@ -519,6 +389,23 @@ h1{
     }
 }
 
+@keyframes toVictoryScreen {
+    to {
+        z-index: 2;
+        top: 220px;
+        opacity: 0;
+        transform: scale(1.2);
+    }    
+}
+
+@keyframes returnVictoryCounter {
+    to {
+        z-index: 0;
+        top: 100px;
+        opacity: 1;
+        transform: scale(1);
+    }    
+}
 
 @media (min-width: 425px){
     #game-container{
@@ -533,20 +420,23 @@ h1{
         width: 40px;
         height: 40px;
     }
+    #game-container::before{
+        height: 249.68px;
+        width: 9px;
+    }
+    
+    #game-container::after{
+        height: 249.68px;
+        width: 9px;
+    }
 
-    .victoryScreen{
+    .victoryScreen {
         width: calc(49px * 7 + 7px);
         height: calc(49px * 6 + 7px);
     }
 
-    #footer{
-        display: flex;
-        justify-content: space-evenly;
-        width: calc(49px * 7 + 7px);
-    }
-
-    .drawDiv{
-        /* transform: translateX(-15%); */
+    .vicCounterVicScreen {
+        top: 107px;
     }
 }
 
@@ -563,19 +453,17 @@ h1{
         width: 44px;
         height: 44px;
     }
-
-    #footer{
-        display: flex;
-        justify-content: space-evenly;
-        width: calc(54px * 7 + 7px);
+    #game-container::before{
+        height: 272.68px;
+        width: 10px;
+    }
+    
+    #game-container::after{
+        height: 272.68px;
+        width: 10px;
     }
 
-    .drawDiv{
-        top: -35%;
-        /* transform: translateX(-19%); */
-    }
-
-    .victoryScreen{
+    .victoryScreen {
         width: calc(54px * 7 + 7px);
         height: calc(54px * 6 + 7px);
     }
@@ -599,22 +487,24 @@ h1{
         border-radius: 10px;
         cursor: pointer;
     }
+    #game-container::before{
+        height: 301.68px;
+        width: 11px;
+    }
+    
+    #game-container::after{
+        height: 301.68px;
+        width: 11px;
+    }
 
     .victoryScreen {
+        max-width: 100%;
+        max-height: 100%;
         width: calc(60px * 7 + 7px);
         height: calc(64px * 6 + 7px);
-        max-height: 100%;
-        max-width: 100%;
     }
 
-    #footer{
-        display: flex;
-        justify-content: space-evenly;
-        width: calc(60px * 7 + 7px);
-    }
-
-    .drawDiv{
-        top: 80%;
-        /* transform: translateX(-4%); */
+    .vicCounterVicScreen {
+        top: 154px;
     }
 }

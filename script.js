@@ -202,19 +202,13 @@ const checkDraw = (database) => {
     }
 }
 
-const counter = (appendBlack, appendRed, appendDraw) => {
+const counter = (appendDraw) => {
     if(lastColor === 'red' && moveCount !== 42){
         blackScore++
-        appendBlack.innerText = `${redScore}`;
-        appendRed.innerText = `${blackScore}`;
-
         mainScoreUpdate('black');
 
     } else if(lastColor === 'black' && moveCount !== 42) {
         redScore++
-        appendBlack.innerText = `${redScore}`;
-        appendRed.innerText = `${blackScore}`;
-
         mainScoreUpdate('red');
 
     } else{
@@ -255,22 +249,6 @@ const resetButton = (appendDiv) => {
     resetButton.addEventListener('click', clearBoard)
 }
 
-const addPlayers = (appendDiv) => {
-    const player1 = document.createElement("div")
-    const player2 = document.createElement("div")
-    player1.classList.add('player1')
-    player2.classList.add('player2')
-    appendDiv.appendChild(player1)
-    appendDiv.appendChild(player2)
-}
-
-const playersDiv = (appendDiv) => {
-    const playersDiv = document.createElement('div');
-    playersDiv.classList.add('playersDiv')
-    addPlayers(playersDiv)
-    appendDiv.appendChild(playersDiv)
-}
-
 const countersContainer = (appendDiv) => {
     const countersContainer = document.createElement('div');
     countersContainer.setAttribute('id', 'counterContainer');
@@ -279,21 +257,10 @@ const countersContainer = (appendDiv) => {
 }
 
 const counterDiv = (appendDiv) => {
-    const counterP1 = document.createElement('div');
-    const counterP2 = document.createElement('div');
     const DrawDiv = document.createElement('div');
     DrawDiv.classList.add('drawDiv');
-    counterP1.classList.add('scores')
-    counterP2.classList.add('scores')
-    counter(counterP1, counterP2, DrawDiv)
-    appendDiv.appendChild(counterP1)
-    appendDiv.appendChild(counterP2)
+    counter(DrawDiv)
     if(moveCount === 42){
-        if(appendDiv.hasChildNodes){
-            appendDiv.appendChild(DrawDiv);
-            appendDiv.removeChild(counterP1);
-            appendDiv.removeChild(counterP2);
-        }
         appendDiv.appendChild(DrawDiv);
     }
 }
@@ -314,7 +281,6 @@ const victoryScreen = () => {
     victoryDiv = document.createElement("div");
     victoryDiv.classList.add("victoryScreen");
     countersContainer(victoryDiv);
-    playersDiv(victoryDiv);
     resetButton(victoryDiv);
     game.appendChild(victoryDiv);
     victoryDiv.classList.remove("hidden")
